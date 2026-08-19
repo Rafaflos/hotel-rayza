@@ -1,0 +1,26 @@
+# === Secretos (NUNCA subir) ===
+backend/secrets.properties
+**/secrets.properties
+*.env
+Carita Hotel/.env
+
+# === Backend (Java / Maven) ===
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# === Frontend (Node / Vite) ===
+Carita Hotel/node_modules/
+Carita Hotel/dist/
+
+# === Tauri (Rust) ===
+Carita Hotel/src-tauri/target/
+Carita Hotel/src-tauri/gen/schemas/
+# El jar del backend se compila en cada build, no se versiona
+Carita Hotel/src-tauri/resources/backend.jar
+
+# === Bóveda Obsidian (notas internas, no es código) ===
+memoria hotel/
+
+# === Sistema ===
+.DS_Store
+*.log

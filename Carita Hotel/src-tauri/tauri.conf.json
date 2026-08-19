@@ -1,0 +1,43 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Hotel Rayza",
+  "version": "1.0.0",
+  "identifier": "com.hotelrayza.app",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5199",
+    "beforeDevCommand": "npm run dev -- --port 5199 --strictPort",
+    "beforeBuildCommand": "node src-tauri/scripts/copy-backend-jar.mjs && npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Hotel Rayza",
+        "width": 1280,
+        "height": 800,
+        "minWidth": 1024,
+        "minHeight": 640,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": ["resources/backend.jar"],
+    "android": {
+      "debugApplicationIdSuffix": ".debug"
+    }
+  }
+}
