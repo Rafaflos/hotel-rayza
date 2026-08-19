@@ -146,6 +146,52 @@ El instalador queda en:
 
 ---
 
+## Actualizaciones automáticas (auto-updater)
+
+La app revisa sola si hay una versión nueva **cada vez que se abre** (si la PC
+tiene internet). Si la hay, le avisa al usuario y, con su confirmación, la
+descarga, la instala y reinicia la app. Los datos en MySQL nunca se tocan.
+
+Para que funcione, hay que configurar **dos cosas una sola vez** en GitHub:
+
+### 1. La URL del repo en la configuración
+En `Carita Hotel/src-tauri/tauri.conf.json`, dentro de `plugins.updater.endpoints`,
+reemplazar `TU-USUARIO` por tu usuario/organización real de GitHub:
+
+```
+"endpoints": [
+  "https://github.com/TU-USUARIO/hotel-rayza/releases/latest/download/latest.json"
+]
+```
+
+### 2. Las llaves de firma como *secrets* del repo
+El instalador se firma para que la app confíe en la actualización. Las llaves
+ya se generaron; la **privada** vive en `~/.tauri/hotel-rayza-updater.key`
+(NUNCA se sube al repo). En GitHub → *Settings* → *Secrets and variables* →
+*Actions* → *New repository secret*, crear:
+
+- `TAURI_SIGNING_PRIVATE_KEY` = **el contenido completo** del archivo
+  `~/.tauri/hotel-rayza-updater.key`.
+- `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` = vacío (la llave se generó sin contraseña).
+
+> ⚠️ Guarda una copia de seguridad de `~/.tauri/hotel-rayza-updater.key` en un
+> lugar seguro. **Si la pierdes, no podrás volver a firmar actualizaciones** y
+> tendrías que reinstalar la app a mano en cada PC.
+
+### Cómo publicar una actualización
+Cada vez que quieras sacar una versión nueva:
+
+1. Subir la versión en `tauri.conf.json` (`"version": "1.0.1"`).
+2. Crear y subir el tag:
+   ```
+   git tag v1.0.1
+   git push origin v1.0.1
+   ```
+3. GitHub Actions compila, firma y publica el Release solo. Las PCs del hotel
+   se actualizan la próxima vez que abran la app.
+
+---
+
 ## Respaldos (recomendado)
 
 Toda la información vive en MySQL. Para respaldar, programar una copia diaria:

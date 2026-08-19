@@ -3,6 +3,9 @@ backend/secrets.properties
 **/secrets.properties
 *.env
 Carita Hotel/.env
+# Llaves de firma del updater (la privada NUNCA va al repo; vive en ~/.tauri)
+*.key
+.tauri/
 
 # === Backend (Java / Maven) ===
 backend/target/
@@ -24,3 +27,7 @@ memoria hotel/
 # === Sistema ===
 .DS_Store
 *.log
+
+# Archivos transitorios de Claude Code
+.claude/scheduled_tasks.lock
+.claude/*.lock

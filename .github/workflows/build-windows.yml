@@ -1,12 +1,17 @@
 name: Build Windows Installer
 
-# Compila el instalador de Windows (.msi / .exe) de Hotel Rayza.
-# Se ejecuta al crear un tag "v*" (ej. v1.0.0) o manualmente desde la pestaña Actions.
+# Compila y firma el instalador de Windows (.msi / .exe) de Hotel Rayza y publica
+# un GitHub Release con los artefactos de actualización (para el auto-updater).
+# Se ejecuta al crear un tag "v*" (ej. v1.0.0) o manualmente desde Actions.
 on:
   push:
     tags:
       - "v*"
   workflow_dispatch:
+
+# Necesario para que la acción pueda crear el Release.
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -39,14 +44,17 @@ jobs:
         working-directory: "Carita Hotel"
         run: npm ci
 
-      - name: Compilar el instalador (Tauri)
-        working-directory: "Carita Hotel"
-        run: npm run tauri build
-
-      - name: Publicar el instalador como artefacto
-        uses: actions/upload-artifact@v4
+      - name: Compilar, firmar y publicar el Release
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Llaves de firma del updater (configurar en Settings > Secrets del repo)
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
-          name: hotel-rayza-windows
-          path: |
-            Carita Hotel/src-tauri/target/release/bundle/msi/*.msi
-            Carita Hotel/src-tauri/target/release/bundle/nsis/*.exe
+          projectPath: "Carita Hotel"
+          tagName: ${{ github.ref_type == 'tag' && github.ref_name || 'app-v__VERSION__' }}
+          releaseName: "Hotel Rayza v__VERSION__"
+          releaseBody: "Nueva versión de Hotel Rayza. La app se actualizará sola al abrirla."
+          releaseDraft: false
+          prerelease: false

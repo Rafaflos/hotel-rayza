@@ -51,6 +51,7 @@ fn stop_backend(app: &tauri::AppHandle) {
 pub fn run() {
     tauri::Builder::default()
         .manage(BackendProcess(Mutex::new(None)))
+        .plugin(tauri_plugin_process::init())
         .setup(|app| {
             if cfg!(debug_assertions) {
                 app.handle().plugin(
@@ -59,6 +60,10 @@ pub fn run() {
                         .build(),
                 )?;
             }
+            // El updater solo existe en escritorio (no en móvil).
+            #[cfg(desktop)]
+            app.handle().plugin(tauri_plugin_updater::Builder::new().build())?;
+
             spawn_backend(&app.handle().clone());
             Ok(())
         })

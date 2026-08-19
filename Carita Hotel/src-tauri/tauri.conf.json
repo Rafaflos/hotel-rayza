@@ -25,9 +25,18 @@
       "csp": null
     }
   },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDY5RDhDQTUzM0JEQjQ4MzEKUldReFNOczdVOHJZYVQ3Zmo4OGRqeGc5SGw2c0laM0MxTlRkdzFTa0hUTTRBZnJsY1Vwb3FkY3oK",
+      "endpoints": [
+        "https://github.com/TU-USUARIO/hotel-rayza/releases/latest/download/latest.json"
+      ]
+    }
+  },
   "bundle": {
     "active": true,
     "targets": "all",
+    "createUpdaterArtifacts": true,
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
