@@ -1,7 +1,7 @@
 package com.hotel.backend.service;
 
 import com.hotel.backend.dto.dashboard.DashboardResponse;
-import com.hotel.backend.dto.estancia.EstanciaResponse;
+import com.hotel.backend.dto.hospedado.HospedadoResponse;
 import com.hotel.backend.entity.EstadoHabitacion;
 import com.hotel.backend.entity.EstadoSolicitudEgreso;
 import com.hotel.backend.repository.CheckinRepository;
@@ -31,7 +31,7 @@ public class DashboardService {
     private final CheckoutRepository checkoutRepository;
     private final PagoRepository pagoRepository;
     private final SolicitudEgresoRepository solicitudEgresoRepository;
-    private final EstanciaService estanciaService;
+    private final HospedadoService hospedadoService;
     private final AvisoService avisoService;
 
     public DashboardResponse resumen() {
@@ -44,9 +44,9 @@ public class DashboardService {
         long total = habitacionRepository.count();
         int tasaOcupacion = total > 0 ? (int) Math.round((ocupadas * 100.0) / total) : 0;
 
-        List<EstanciaResponse> vencidas = estanciaService.findVencidas();
+        List<HospedadoResponse> vencidas = hospedadoService.findVencidas();
         BigDecimal porCobrarVencidas = vencidas.stream()
-                .map(EstanciaResponse::saldoPendiente)
+                .map(HospedadoResponse::saldoPendiente)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         return new DashboardResponse(

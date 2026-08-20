@@ -1,6 +1,6 @@
 package com.hotel.backend.service;
 
-import com.hotel.backend.dto.estancia.EstanciaResponse;
+import com.hotel.backend.dto.hospedado.HospedadoResponse;
 import com.hotel.backend.entity.EstadoReserva;
 import com.hotel.backend.entity.Reserva;
 import com.hotel.backend.repository.ConsumoRepository;
@@ -26,21 +26,21 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class EstanciaService {
+public class HospedadoService {
 
     private final ReservaRepository reservaRepository;
     private final PagoRepository pagoRepository;
     private final ConsumoRepository consumoRepository;
 
-    public List<EstanciaResponse> findActivas() {
+    public List<HospedadoResponse> findActivas() {
         return reservaRepository.findByEstado(EstadoReserva.CHECK_IN).stream()
                 .map(this::toResponse)
                 .toList();
     }
 
     /** Solo las que ya se pasaron de la hora límite (para la alerta del dashboard). */
-    public List<EstanciaResponse> findVencidas() {
-        return findActivas().stream().filter(EstanciaResponse::vencida).toList();
+    public List<HospedadoResponse> findVencidas() {
+        return findActivas().stream().filter(HospedadoResponse::vencida).toList();
     }
 
     /**
@@ -61,7 +61,7 @@ public class EstanciaService {
         return reserva.getPrecioNoche().multiply(BigDecimal.valueOf(diasExtra));
     }
 
-    private EstanciaResponse toResponse(Reserva reserva) {
+    private HospedadoResponse toResponse(Reserva reserva) {
         LocalDateTime ahora = LocalDateTime.now();
         int diasExtra = calcularDiasExtra(reserva, ahora);
         BigDecimal cargoExtra = calcularCargoExtra(reserva, diasExtra);
@@ -82,7 +82,7 @@ public class EstanciaService {
                 ? "VENCIDA"
                 : (saldo.compareTo(BigDecimal.ZERO) > 0 ? "POR COBRAR" : "AL DIA");
 
-        return new EstanciaResponse(
+        return new HospedadoResponse(
                 reserva.getId(),
                 reserva.getCodigo(),
                 reserva.getHabitacion().getNumero(),

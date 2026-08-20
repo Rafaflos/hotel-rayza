@@ -34,7 +34,7 @@ public class CheckoutService {
     private final HabitacionRepository habitacionRepository;
     private final ConsumoRepository consumoRepository;
     private final LimpiezaRepository limpiezaRepository;
-    private final EstanciaService estanciaService;
+    private final HospedadoService hospedadoService;
     private final CurrentUserService currentUserService;
     private final HuespedMapper huespedMapper;
     private final HabitacionMapper habitacionMapper;
@@ -63,8 +63,8 @@ public class CheckoutService {
 
         // Si el huésped se pasó de su hora límite, se le cobran los días extra
         // a la tarifa de la habitación y quedan registrados en la reserva.
-        int diasExtra = estanciaService.calcularDiasExtra(reserva, java.time.LocalDateTime.now());
-        BigDecimal cargoExtra = estanciaService.calcularCargoExtra(reserva, diasExtra);
+        int diasExtra = hospedadoService.calcularDiasExtra(reserva, java.time.LocalDateTime.now());
+        BigDecimal cargoExtra = hospedadoService.calcularCargoExtra(reserva, diasExtra);
         if (diasExtra > 0) {
             reserva.setDiasExtra(diasExtra);
             reserva.setCargoExtra(cargoExtra);

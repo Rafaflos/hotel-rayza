@@ -9,7 +9,7 @@ import {
   IconDashboard,
   IconEgresos,
   IconEmpleados,
-  IconEstancias,
+  IconHospedados,
   IconHabitaciones,
   IconHuespedes,
   IconLimpieza,
@@ -48,7 +48,7 @@ export const grupos: GrupoModulos[] = [
     titulo: 'Operación',
     modulos: [
       { to: '/', label: 'Panel', icon: IconDashboard },
-      { to: '/estancias', label: 'Estancias', icon: IconEstancias, roles: OPERATIVOS, indicador: 'vencidas' },
+      { to: '/hospedados', label: 'Hospedados', icon: IconHospedados, roles: OPERATIVOS, indicador: 'vencidas' },
       { to: '/reservas', label: 'Reservas', icon: IconReservas, roles: OPERATIVOS },
       { to: '/checkin', label: 'Check-in', icon: IconCheckIn, roles: OPERATIVOS },
       { to: '/checkout', label: 'Check-out', icon: IconCheckOut, roles: OPERATIVOS },

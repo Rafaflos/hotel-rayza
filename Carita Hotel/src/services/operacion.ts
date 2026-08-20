@@ -1,9 +1,9 @@
 import { api } from './api'
-import type { Aviso, AvisoInput, Estancia, SolicitudEgreso } from '../types/operacion'
+import type { Aviso, AvisoInput, Hospedado, SolicitudEgreso } from '../types/operacion'
 
-export const estanciasService = {
-  activas: () => api.get<Estancia[]>('/estancias').then((r) => r.data),
-  vencidas: () => api.get<Estancia[]>('/estancias', { params: { soloVencidas: true } }).then((r) => r.data),
+export const hospedadosService = {
+  activas: () => api.get<Hospedado[]>('/hospedados').then((r) => r.data),
+  vencidas: () => api.get<Hospedado[]>('/hospedados', { params: { soloVencidas: true } }).then((r) => r.data),
 }
 
 export const egresosService = {

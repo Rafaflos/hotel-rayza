@@ -1,6 +1,6 @@
-/** Tipos de las funciones operativas: estancias, caja chica y avisos internos. */
+/** Tipos de las funciones operativas: hospedados, caja chica y avisos internos. */
 
-export interface Estancia {
+export interface Hospedado {
   reservaId: number
   codigo: string
   habitacionNumero: string

@@ -30,7 +30,7 @@ export const IconDashboard = (p: IconProps) => (
   </Icon>
 )
 
-export const IconEstancias = (p: IconProps) => (
+export const IconHospedados = (p: IconProps) => (
   <Icon {...p}>
     <path d="M3 18v-9M3 13h18v5M21 18v-3" />
     <path d="M7 13V9.5A1.5 1.5 0 0 1 8.5 8h9a3.5 3.5 0 0 1 3.5 3.5V13" />

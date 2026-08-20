@@ -1,7 +1,7 @@
 package com.hotel.backend.controller;
 
-import com.hotel.backend.dto.estancia.EstanciaResponse;
-import com.hotel.backend.service.EstanciaService;
+import com.hotel.backend.dto.hospedado.HospedadoResponse;
+import com.hotel.backend.service.HospedadoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/estancias")
+@RequestMapping("/api/hospedados")
 @RequiredArgsConstructor
-public class EstanciaController {
+public class HospedadoController {
 
-    private final EstanciaService service;
+    private final HospedadoService service;
 
     @GetMapping
-    public List<EstanciaResponse> findAll(@RequestParam(required = false, defaultValue = "false") boolean soloVencidas) {
+    public List<HospedadoResponse> findAll(@RequestParam(required = false, defaultValue = "false") boolean soloVencidas) {
         return soloVencidas ? service.findVencidas() : service.findActivas();
     }
 }

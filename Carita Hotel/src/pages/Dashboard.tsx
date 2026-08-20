@@ -158,7 +158,7 @@ export function Dashboard() {
         <div className="flex flex-col gap-6">
           {resumen.estanciasVencidas > 0 && (
             <Link
-              to="/estancias"
+              to="/hospedados"
               className="group flex items-center gap-3.5 rounded-[var(--radius-card)] border border-risk/30
  bg-risk-soft px-4 py-3.5 transition-colors duration-150 hover:border-risk/50"
             >

@@ -1,4 +1,4 @@
-package com.hotel.backend.dto.estancia;
+package com.hotel.backend.dto.hospedado;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,7 +8,7 @@ import java.time.LocalTime;
  * Vista operativa de una estancia en curso: cuánto debe el huésped y si ya se
  * pasó de su hora de salida.
  */
-public record EstanciaResponse(
+public record HospedadoResponse(
         Long reservaId,
         String codigo,
         String habitacionNumero,
