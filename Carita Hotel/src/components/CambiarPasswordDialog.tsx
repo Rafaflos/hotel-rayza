@@ -50,7 +50,7 @@ export function CambiarPasswordDialog({ open, onClose }: { open: boolean; onClos
     <Dialog open={open} onClose={handleClose} title="Cambiar contraseña">
       {ok ? (
         <div className="flex flex-col gap-4">
-          <p className="text-sm text-neutral-600 dark:text-neutral-400">Tu contraseña se actualizó correctamente.</p>
+          <p className="text-sm text-ink-2">Tu contraseña se actualizó correctamente.</p>
           <div className="flex justify-end">
             <Button onClick={handleClose}>Cerrar</Button>
           </div>

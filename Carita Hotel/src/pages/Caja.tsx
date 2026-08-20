@@ -117,7 +117,7 @@ export function Caja() {
         <div className="flex flex-col gap-6">
           <div className="flex items-center gap-3">
             <Badge tone={estadoCajaInfo[caja.estado].tone}>{estadoCajaInfo[caja.estado].label}</Badge>
-            <span className="text-sm text-neutral-500 dark:text-neutral-400">
+            <span className="text-sm text-ink-3">
               Abierta por {caja.usuarioApertura ?? '—'} el {caja.fechaApertura.slice(0, 16).replace('T', ' ')}
             </span>
           </div>
@@ -130,10 +130,10 @@ export function Caja() {
           </div>
 
           <div>
-            <h3 className="mb-3 text-sm font-medium text-neutral-500 dark:text-neutral-400">Movimientos</h3>
-            <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+            <h3 className="mb-3 text-sm font-medium text-ink-3">Movimientos</h3>
+            <div className="overflow-x-auto rounded-lg border border-line">
               <table className="w-full text-left text-sm">
-                <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
+                <thead className="bg-canvas text-xs uppercase tracking-wide text-ink-3">
                   <tr>
                     <th className="px-4 py-3 font-medium">Fecha</th>
                     <th className="px-4 py-3 font-medium">Tipo</th>
@@ -141,22 +141,22 @@ export function Caja() {
                     <th className="px-4 py-3 font-medium text-right">Monto</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+                <tbody className="divide-y divide-line">
                   {movimientos.map((m) => (
                     <tr key={m.id}>
-                      <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{m.fechaHora.slice(0, 16).replace('T', ' ')}</td>
+                      <td className="px-4 py-3 text-ink-2">{m.fechaHora.slice(0, 16).replace('T', ' ')}</td>
                       <td className="px-4 py-3">
                         <Badge tone={m.tipo === 'INGRESO' ? 'success' : 'danger'}>{m.tipo === 'INGRESO' ? 'Ingreso' : 'Egreso'}</Badge>
                       </td>
-                      <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{m.concepto}</td>
-                      <td className="px-4 py-3 text-right tabular-nums text-neutral-600 dark:text-neutral-400">
+                      <td className="px-4 py-3 text-ink-2">{m.concepto}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-ink-2">
                         S/ {m.monto.toFixed(2)}
                       </td>
                     </tr>
                   ))}
                   {movimientos.length === 0 && (
                     <tr>
-                      <td colSpan={4} className="px-4 py-6 text-center text-neutral-500 dark:text-neutral-400">
+                      <td colSpan={4} className="px-4 py-6 text-center text-ink-3">
                         Todavía no hay movimientos en este turno.
                       </td>
                     </tr>
@@ -204,8 +204,8 @@ export function Caja() {
         <form onSubmit={handleCerrar} className="flex flex-col gap-4">
           {formError && <ErrorBanner message={formError} />}
           {caja && (
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              Monto esperado en caja: <span className="font-semibold text-neutral-900 dark:text-neutral-100">S/ {montoEsperado.toFixed(2)}</span>
+            <p className="text-sm text-ink-2">
+              Monto esperado en caja: <span className="font-semibold text-ink">S/ {montoEsperado.toFixed(2)}</span>
             </p>
           )}
           <Field label="Monto contado (S/)" htmlFor="montoContado" required>

@@ -19,4 +19,12 @@ public interface PagoRepository extends JpaRepository<Pago, Long> {
               AND p.estado = com.hotel.backend.entity.EstadoPago.CONFIRMADO
             """)
     BigDecimal sumConfirmadosBetween(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
+
+    /** Total ya pagado de una reserva (solo pagos confirmados). */
+    @Query("""
+            SELECT COALESCE(SUM(p.monto), 0) FROM Pago p
+            WHERE p.reserva.id = :reservaId
+              AND p.estado = com.hotel.backend.entity.EstadoPago.CONFIRMADO
+            """)
+    BigDecimal sumConfirmadosByReserva(@Param("reservaId") Long reservaId);
 }

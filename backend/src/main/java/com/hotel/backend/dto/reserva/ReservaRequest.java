@@ -7,12 +7,15 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public record ReservaRequest(
         @NotNull(message = "El huésped principal es obligatorio") Long huespedPrincipalId,
         @NotNull(message = "La habitación es obligatoria") Long habitacionId,
         @NotNull @FutureOrPresent(message = "La fecha de entrada no puede ser en el pasado") LocalDate fechaEntrada,
         @NotNull LocalDate fechaSalida,
+        /** Hora tope de salida; si no se envía, se usa 1:00 p.m. */
+        LocalTime horaLimiteSalida,
         @NotNull @Positive(message = "La cantidad de huéspedes debe ser mayor a 0") Integer cantidadHuespedes,
         @DecimalMin(value = "0", message = "El descuento no puede ser negativo") BigDecimal descuento,
         String observaciones

@@ -19,6 +19,10 @@ public record CajaResponse(
         EstadoCaja estado,
         LocalDateTime fechaApertura,
         LocalDateTime fechaCierre,
-        String observaciones
+        String observaciones,
+        /** Lo que debería haber en caja: inicial + ingresos - egresos. */
+        BigDecimal efectivoEsperado,
+        /** true si el turno lo abrió el usuario que está consultando. */
+        boolean miTurno
 ) {
 }

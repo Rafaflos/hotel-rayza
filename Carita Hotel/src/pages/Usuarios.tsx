@@ -126,9 +126,9 @@ export function Usuarios() {
 
       {error && <ErrorBanner message={error} />}
 
-      <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+      <div className="overflow-x-auto rounded-lg border border-line">
         <table className="w-full text-left text-sm">
-          <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
+          <thead className="bg-canvas text-xs uppercase tracking-wide text-ink-3">
             <tr>
               <th className="px-4 py-3 font-medium">Usuario</th>
               <th className="px-4 py-3 font-medium">Nombre</th>
@@ -137,14 +137,14 @@ export function Usuarios() {
               <th className="px-4 py-3 font-medium text-right">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <tbody className="divide-y divide-line">
             {loading ? (
               <TableSkeleton columns={5} />
             ) : (
               usuarios.map((u) => (
-                <tr key={u.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-900/60">
-                  <td className="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">{u.username}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
+                <tr key={u.id} className="hover:bg-canvas/60">
+                  <td className="px-4 py-3 font-medium text-ink">{u.username}</td>
+                  <td className="px-4 py-3 text-ink-2">
                     {u.nombres} {u.apellidos}
                   </td>
                   <td className="px-4 py-3">
@@ -167,7 +167,7 @@ export function Usuarios() {
                       {u.username !== 'admin' && u.activo && (
                         <Button
                           variant="ghost"
-                          className="px-2 py-1 text-red-600 dark:text-red-400"
+                          className="px-2 py-1 text-risk"
                           onClick={() => handleDesactivar(u)}
                         >
                           Desactivar
@@ -245,17 +245,17 @@ export function Usuarios() {
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-medium text-neutral-700 dark:text-neutral-300">
-              Roles <span className="text-red-600 dark:text-red-400">*</span>
+            <p className="mb-2 text-sm font-medium text-ink-2">
+              Roles <span className="text-risk">*</span>
             </p>
             <div className="grid grid-cols-2 gap-2">
               {roles.map((rol) => (
-                <label key={rol.id} className="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300">
+                <label key={rol.id} className="flex items-center gap-2 text-sm text-ink-2">
                   <input
                     type="checkbox"
                     checked={form.rolesIds.includes(rol.id)}
                     onChange={() => toggleRol(rol.id)}
-                    className="h-4 w-4 rounded border-neutral-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500 dark:border-neutral-700 dark:bg-neutral-900"
+                    className="h-4 w-4 rounded border-line text-brand focus:ring-2 focus:ring-indigo-500"
                   />
                   {rol.nombre}
                 </label>

@@ -80,9 +80,9 @@ export function CheckOut() {
 
       {error && <ErrorBanner message={error} />}
 
-      <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+      <div className="overflow-x-auto rounded-lg border border-line">
         <table className="w-full text-left text-sm">
-          <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
+          <thead className="bg-canvas text-xs uppercase tracking-wide text-ink-3">
             <tr>
               <th className="px-4 py-3 font-medium">Código</th>
               <th className="px-4 py-3 font-medium">Huésped</th>
@@ -93,19 +93,19 @@ export function CheckOut() {
               <th className="px-4 py-3 font-medium text-right">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <tbody className="divide-y divide-line">
             {loading ? (
               <TableSkeleton columns={7} />
             ) : (
               enCurso.map((r) => (
-                <tr key={r.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-900/60">
-                  <td className="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">{r.codigo}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
+                <tr key={r.id} className="hover:bg-canvas/60">
+                  <td className="px-4 py-3 font-medium text-ink">{r.codigo}</td>
+                  <td className="px-4 py-3 text-ink-2">
                     {r.huespedPrincipal.nombres} {r.huespedPrincipal.apellidos}
                   </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{r.habitacion.numero}</td>
-                  <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">{r.fechaSalida}</td>
-                  <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">S/ {r.total.toFixed(2)}</td>
+                  <td className="px-4 py-3 text-ink-2">{r.habitacion.numero}</td>
+                  <td className="px-4 py-3 tabular-nums text-ink-2">{r.fechaSalida}</td>
+                  <td className="px-4 py-3 tabular-nums text-ink-2">S/ {r.total.toFixed(2)}</td>
                   <td className="px-4 py-3">
                     <Badge tone={estadoReservaInfo[r.estado].tone}>{estadoReservaInfo[r.estado].label}</Badge>
                   </td>
@@ -131,10 +131,10 @@ export function CheckOut() {
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} title={`Check-out — ${target?.codigo ?? ''}`}>
         {result ? (
           <div className="flex flex-col gap-4">
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              Check-out registrado. Total de la estadía: <span className="font-semibold text-neutral-900 dark:text-neutral-100">S/ {result.total.toFixed(2)}</span>
+            <p className="text-sm text-ink-2">
+              Check-out registrado. Total de la estadía: <span className="font-semibold text-ink">S/ {result.total.toFixed(2)}</span>
             </p>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            <p className="text-sm text-ink-2">
               Recuerda registrar el pago correspondiente en la sección Pagos.
             </p>
             <div className="mt-2 flex justify-end">
@@ -146,7 +146,7 @@ export function CheckOut() {
             {formError && <ErrorBanner message={formError} />}
 
             {target && (
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              <p className="text-sm text-ink-2">
                 {target.huespedPrincipal.nombres} {target.huespedPrincipal.apellidos} — Habitación {target.habitacion.numero} — Hospedaje S/ {target.total.toFixed(2)}
               </p>
             )}

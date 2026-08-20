@@ -131,9 +131,9 @@ export function Limpieza() {
 
       {error && <ErrorBanner message={error} />}
 
-      <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+      <div className="overflow-x-auto rounded-lg border border-line">
         <table className="w-full text-left text-sm">
-          <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
+          <thead className="bg-canvas text-xs uppercase tracking-wide text-ink-3">
             <tr>
               <th className="px-4 py-3 font-medium">Habitación</th>
               <th className="px-4 py-3 font-medium">Fecha</th>
@@ -143,18 +143,18 @@ export function Limpieza() {
               <th className="px-4 py-3 font-medium text-right">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <tbody className="divide-y divide-line">
             {loading ? (
               <TableSkeleton columns={6} />
             ) : (
               tareas.map((t) => (
-                <tr key={t.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-900/60">
-                  <td className="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">{t.habitacion.numero}</td>
-                  <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">
+                <tr key={t.id} className="hover:bg-canvas/60">
+                  <td className="px-4 py-3 font-medium text-ink">{t.habitacion.numero}</td>
+                  <td className="px-4 py-3 tabular-nums text-ink-2">
                     {t.fechaHora.slice(0, 16).replace('T', ' ')}
                   </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{t.empleadoNombre || '—'}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{t.observaciones || '—'}</td>
+                  <td className="px-4 py-3 text-ink-2">{t.empleadoNombre || '—'}</td>
+                  <td className="px-4 py-3 text-ink-2">{t.observaciones || '—'}</td>
                   <td className="px-4 py-3">
                     <Badge tone={estadoLimpiezaInfo[t.estado].tone}>{estadoLimpiezaInfo[t.estado].label}</Badge>
                   </td>
@@ -170,7 +170,7 @@ export function Limpieza() {
                       </Button>
                       <Button
                         variant="ghost"
-                        className="px-2 py-1 text-amber-600 dark:text-amber-400"
+                        className="px-2 py-1 text-warn"
                         disabled={actionId === t.id}
                         onClick={() => handleObservar(t.id)}
                       >

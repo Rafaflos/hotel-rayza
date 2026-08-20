@@ -34,6 +34,7 @@ public class CheckoutService {
     private final HabitacionRepository habitacionRepository;
     private final ConsumoRepository consumoRepository;
     private final LimpiezaRepository limpiezaRepository;
+    private final EstanciaService estanciaService;
     private final CurrentUserService currentUserService;
     private final HuespedMapper huespedMapper;
     private final HabitacionMapper habitacionMapper;
@@ -60,8 +61,17 @@ public class CheckoutService {
             throw new BusinessException("Esta reserva ya tiene un check-out registrado");
         }
 
+        // Si el huésped se pasó de su hora límite, se le cobran los días extra
+        // a la tarifa de la habitación y quedan registrados en la reserva.
+        int diasExtra = estanciaService.calcularDiasExtra(reserva, java.time.LocalDateTime.now());
+        BigDecimal cargoExtra = estanciaService.calcularCargoExtra(reserva, diasExtra);
+        if (diasExtra > 0) {
+            reserva.setDiasExtra(diasExtra);
+            reserva.setCargoExtra(cargoExtra);
+        }
+
         BigDecimal descuento = request.descuento() != null ? request.descuento() : BigDecimal.ZERO;
-        BigDecimal subtotalHospedaje = reserva.getTotal();
+        BigDecimal subtotalHospedaje = reserva.getTotal().add(cargoExtra);
         BigDecimal subtotalConsumos = consumoRepository.sumByReserva(reserva.getId());
         BigDecimal subtotalServicios = BigDecimal.ZERO;
         BigDecimal total = subtotalHospedaje.add(subtotalConsumos).add(subtotalServicios).subtract(descuento).max(BigDecimal.ZERO);

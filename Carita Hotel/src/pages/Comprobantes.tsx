@@ -97,9 +97,9 @@ export function Comprobantes() {
 
       {error && <ErrorBanner message={error} />}
 
-      <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+      <div className="overflow-x-auto rounded-lg border border-line">
         <table className="w-full text-left text-sm">
-          <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
+          <thead className="bg-canvas text-xs uppercase tracking-wide text-ink-3">
             <tr>
               <th className="px-4 py-3 font-medium">N°</th>
               <th className="px-4 py-3 font-medium">Tipo</th>
@@ -111,29 +111,29 @@ export function Comprobantes() {
               <th className="px-4 py-3 font-medium text-right">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <tbody className="divide-y divide-line">
             {loading ? (
               <TableSkeleton columns={8} />
             ) : (
               comprobantes.map((c) => (
-                <tr key={c.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-900/60">
-                  <td className="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">
+                <tr key={c.id} className="hover:bg-canvas/60">
+                  <td className="px-4 py-3 font-medium text-ink">
                     {c.serie}-{c.numero}
                   </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{c.tipo}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{c.clienteNombre}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{c.reservaCodigo}</td>
-                  <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">S/ {c.total.toFixed(2)}</td>
+                  <td className="px-4 py-3 text-ink-2">{c.tipo}</td>
+                  <td className="px-4 py-3 text-ink-2">{c.clienteNombre}</td>
+                  <td className="px-4 py-3 text-ink-2">{c.reservaCodigo}</td>
+                  <td className="px-4 py-3 tabular-nums text-ink-2">S/ {c.total.toFixed(2)}</td>
                   <td className="px-4 py-3">
                     <Badge tone={estadoComprobanteInfo[c.estado].tone}>{estadoComprobanteInfo[c.estado].label}</Badge>
                   </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
+                  <td className="px-4 py-3 text-ink-2">
                     {c.sunatAceptada === true && c.sunatEnlacePdf ? (
-                      <a href={c.sunatEnlacePdf} target="_blank" rel="noreferrer" className="text-indigo-600 hover:underline dark:text-indigo-400">
+                      <a href={c.sunatEnlacePdf} target="_blank" rel="noreferrer" className="text-brand hover:underline">
                         Ver PDF
                       </a>
                     ) : c.sunatAceptada === false ? (
-                      <span className="text-red-600 dark:text-red-400" title={c.sunatDescripcion ?? undefined}>
+                      <span className="text-risk" title={c.sunatDescripcion ?? undefined}>
                         Rechazado
                       </span>
                     ) : (
@@ -144,7 +144,7 @@ export function Comprobantes() {
                     {c.estado === 'EMITIDO' && (
                       <Button
                         variant="ghost"
-                        className="px-2 py-1 text-red-600 dark:text-red-400"
+                        className="px-2 py-1 text-risk"
                         disabled={actionId === c.id}
                         onClick={() => handleAnular(c.id)}
                       >
@@ -170,31 +170,31 @@ export function Comprobantes() {
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} title="Emitir comprobante">
         {emitido ? (
           <div className="flex flex-col gap-3 print:gap-1">
-            <div className="rounded-lg border border-neutral-200 p-4 text-sm dark:border-neutral-800">
-              <p className="text-center font-semibold text-neutral-900 dark:text-neutral-100">
+            <div className="rounded-lg border border-line p-4 text-sm">
+              <p className="text-center font-semibold text-ink">
                 {emitido.tipo} {emitido.serie}-{emitido.numero}
               </p>
-              <p className="mt-1 text-center text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="mt-1 text-center text-xs text-ink-3">
                 {emitido.fechaEmision.slice(0, 16).replace('T', ' ')}
               </p>
-              <div className="mt-3 border-t border-dashed border-neutral-300 pt-3 dark:border-neutral-700">
-                <p className="text-neutral-600 dark:text-neutral-400">Cliente: {emitido.clienteNombre}</p>
-                <p className="text-neutral-600 dark:text-neutral-400">
+              <div className="mt-3 border-t border-dashed border-line pt-3">
+                <p className="text-ink-2">Cliente: {emitido.clienteNombre}</p>
+                <p className="text-ink-2">
                   {emitido.clienteTipoDocumento} {emitido.clienteNumeroDocumento}
                 </p>
-                <p className="text-neutral-600 dark:text-neutral-400">Reserva: {emitido.reservaCodigo}</p>
-                <p className="text-neutral-600 dark:text-neutral-400">Habitación: {emitido.habitacionNumero}</p>
+                <p className="text-ink-2">Reserva: {emitido.reservaCodigo}</p>
+                <p className="text-ink-2">Habitación: {emitido.habitacionNumero}</p>
               </div>
-              <div className="mt-3 border-t border-dashed border-neutral-300 pt-3 dark:border-neutral-700">
-                <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
+              <div className="mt-3 border-t border-dashed border-line pt-3">
+                <div className="flex justify-between text-ink-2">
                   <span>Subtotal</span>
                   <span>S/ {emitido.subtotal.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
+                <div className="flex justify-between text-ink-2">
                   <span>Descuento</span>
                   <span>S/ {emitido.descuento.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between font-semibold text-neutral-900 dark:text-neutral-100">
+                <div className="flex justify-between font-semibold text-ink">
                   <span>Total</span>
                   <span>S/ {emitido.total.toFixed(2)}</span>
                 </div>

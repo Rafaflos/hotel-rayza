@@ -1,23 +1,30 @@
 import type { ButtonHTMLAttributes } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'danger' | 'ghost'
+type Variant = 'primary' | 'secondary' | 'ghost' | 'danger'
+type Size = 'sm' | 'md'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant
+  size?: Size
 }
 
 const base =
-  'inline-flex items-center justify-center gap-1.5 rounded-md text-sm font-medium px-3 py-2 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-neutral-950 disabled:opacity-50 disabled:pointer-events-none'
+  'inline-flex items-center justify-center gap-1.5 rounded-lg font-medium whitespace-nowrap ' +
+  'transition-[background-color,border-color,color,box-shadow] duration-150 ' +
+  'disabled:opacity-45 disabled:pointer-events-none'
 
-const variants: Record<Variant, string> = {
-  primary: 'bg-indigo-600 text-white hover:bg-indigo-500 active:bg-indigo-700',
-  secondary:
-    'bg-white text-neutral-900 border border-neutral-300 hover:bg-neutral-50 active:bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-800',
-  danger: 'bg-red-600 text-white hover:bg-red-500 active:bg-red-700',
-  ghost:
-    'text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-800',
+const sizes: Record<Size, string> = {
+  sm: 'h-8 px-2.5 text-[13px]',
+  md: 'h-9.5 px-3.5 text-sm',
 }
 
-export function Button({ variant = 'primary', className = '', ...props }: ButtonProps) {
-  return <button className={`${base} ${variants[variant]} ${className}`} {...props} />
+const variants: Record<Variant, string> = {
+  primary: 'bg-brand text-white shadow-[0_1px_2px_rgb(15_23_42/0.12)] hover:bg-brand-hover active:translate-y-px',
+  secondary: 'bg-surface text-ink border border-line hover:border-line-strong hover:bg-canvas active:translate-y-px',
+  ghost: 'text-ink-2 hover:bg-canvas hover:text-ink active:translate-y-px',
+  danger: 'bg-risk text-white hover:brightness-110 active:translate-y-px',
+}
+
+export function Button({ variant = 'primary', size = 'md', className = '', ...props }: ButtonProps) {
+  return <button className={`${base} ${sizes[size]} ${variants[variant]} ${className}`} {...props} />
 }

@@ -83,7 +83,7 @@ export function Reportes() {
       {resumen && (
         <div className="flex flex-col gap-6">
           <div>
-            <h3 className="mb-3 text-sm font-medium text-neutral-500 dark:text-neutral-400">General</h3>
+            <h3 className="mb-3 text-sm font-medium text-ink-3">General</h3>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
               <StatCard label="Habitaciones" value={resumen.totalHabitaciones} />
               <StatCard label="Ocupadas ahora" value={resumen.habitacionesOcupadasActual} />
@@ -95,7 +95,7 @@ export function Reportes() {
           </div>
 
           <div>
-            <h3 className="mb-3 text-sm font-medium text-neutral-500 dark:text-neutral-400">Ingresos</h3>
+            <h3 className="mb-3 text-sm font-medium text-ink-3">Ingresos</h3>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               <StatCard label="Total" value={`S/ ${resumen.ingresosTotal.toFixed(2)}`} />
               {Object.entries(resumen.ingresosPorMetodo).map(([metodo, monto]) => (
@@ -105,27 +105,27 @@ export function Reportes() {
           </div>
 
           <div>
-            <h3 className="mb-3 text-sm font-medium text-neutral-500 dark:text-neutral-400">Reservas por estado</h3>
+            <h3 className="mb-3 text-sm font-medium text-ink-3">Reservas por estado</h3>
             <div className="flex flex-wrap gap-2">
               {Object.entries(resumen.reservasPorEstado).map(([estado, cantidad]) => (
                 <span
                   key={estado}
-                  className="rounded-md border border-neutral-200 px-3 py-1.5 text-sm text-neutral-700 dark:border-neutral-800 dark:text-neutral-300"
+                  className="rounded-md border border-line px-3 py-1.5 text-sm text-ink-2"
                 >
                   {estado}: <span className="font-semibold">{cantidad}</span>
                 </span>
               ))}
               {Object.keys(resumen.reservasPorEstado).length === 0 && (
-                <p className="text-sm text-neutral-500 dark:text-neutral-400">Sin reservas en este rango.</p>
+                <p className="text-sm text-ink-3">Sin reservas en este rango.</p>
               )}
             </div>
           </div>
 
           <div>
-            <h3 className="mb-3 text-sm font-medium text-neutral-500 dark:text-neutral-400">Caja</h3>
-            <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+            <h3 className="mb-3 text-sm font-medium text-ink-3">Caja</h3>
+            <div className="overflow-x-auto rounded-lg border border-line">
               <table className="w-full text-left text-sm">
-                <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
+                <thead className="bg-canvas text-xs uppercase tracking-wide text-ink-3">
                   <tr>
                     <th className="px-4 py-3 font-medium">Fecha</th>
                     <th className="px-4 py-3 font-medium">Apertura</th>
@@ -135,14 +135,14 @@ export function Reportes() {
                     <th className="px-4 py-3 font-medium">Estado</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+                <tbody className="divide-y divide-line">
                   {resumen.cajas.map((c) => (
                     <tr key={c.id}>
-                      <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{c.fecha}</td>
-                      <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{c.usuarioApertura ?? '—'}</td>
-                      <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">S/ {c.totalIngresos.toFixed(2)}</td>
-                      <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">S/ {c.totalEgresos.toFixed(2)}</td>
-                      <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">
+                      <td className="px-4 py-3 text-ink-2">{c.fecha}</td>
+                      <td className="px-4 py-3 text-ink-2">{c.usuarioApertura ?? '—'}</td>
+                      <td className="px-4 py-3 tabular-nums text-ink-2">S/ {c.totalIngresos.toFixed(2)}</td>
+                      <td className="px-4 py-3 tabular-nums text-ink-2">S/ {c.totalEgresos.toFixed(2)}</td>
+                      <td className="px-4 py-3 tabular-nums text-ink-2">
                         {c.diferencia != null ? `S/ ${c.diferencia.toFixed(2)}` : '—'}
                       </td>
                       <td className="px-4 py-3">
@@ -152,7 +152,7 @@ export function Reportes() {
                   ))}
                   {resumen.cajas.length === 0 && (
                     <tr>
-                      <td colSpan={6} className="px-4 py-6 text-center text-neutral-500 dark:text-neutral-400">
+                      <td colSpan={6} className="px-4 py-6 text-center text-ink-3">
                         No hubo turnos de caja en este rango.
                       </td>
                     </tr>

@@ -136,14 +136,14 @@ export function Reservas() {
       {error && <ErrorBanner message={error} />}
 
       {!loading && habitacionesDisponibles.length === 0 && habitaciones.length > 0 && (
-        <p className="mb-4 text-sm text-neutral-500 dark:text-neutral-400">
+        <p className="mb-4 text-sm text-ink-3">
           No hay habitaciones disponibles en este momento para crear una nueva reserva.
         </p>
       )}
 
-      <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+      <div className="overflow-x-auto rounded-lg border border-line">
         <table className="w-full text-left text-sm">
-          <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
+          <thead className="bg-canvas text-xs uppercase tracking-wide text-ink-3">
             <tr>
               <th className="px-4 py-3 font-medium">Código</th>
               <th className="px-4 py-3 font-medium">Huésped</th>
@@ -156,21 +156,21 @@ export function Reservas() {
               <th className="px-4 py-3 font-medium text-right">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <tbody className="divide-y divide-line">
             {loading ? (
               <TableSkeleton columns={9} />
             ) : (
               reservas.map((r) => (
-                <tr key={r.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-900/60">
-                  <td className="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">{r.codigo}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
+                <tr key={r.id} className="hover:bg-canvas/60">
+                  <td className="px-4 py-3 font-medium text-ink">{r.codigo}</td>
+                  <td className="px-4 py-3 text-ink-2">
                     {r.huespedPrincipal.nombres} {r.huespedPrincipal.apellidos}
                   </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{r.habitacion.numero}</td>
-                  <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">{r.fechaEntrada}</td>
-                  <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">{r.fechaSalida}</td>
-                  <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">{r.cantidadNoches}</td>
-                  <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">S/ {r.total.toFixed(2)}</td>
+                  <td className="px-4 py-3 text-ink-2">{r.habitacion.numero}</td>
+                  <td className="px-4 py-3 tabular-nums text-ink-2">{r.fechaEntrada}</td>
+                  <td className="px-4 py-3 tabular-nums text-ink-2">{r.fechaSalida}</td>
+                  <td className="px-4 py-3 tabular-nums text-ink-2">{r.cantidadNoches}</td>
+                  <td className="px-4 py-3 tabular-nums text-ink-2">S/ {r.total.toFixed(2)}</td>
                   <td className="px-4 py-3">
                     <Badge tone={estadoReservaInfo[r.estado].tone}>{estadoReservaInfo[r.estado].label}</Badge>
                   </td>
@@ -189,7 +189,7 @@ export function Reservas() {
                       {(r.estado === 'PENDIENTE' || r.estado === 'CONFIRMADA') && (
                         <Button
                           variant="ghost"
-                          className="px-2 py-1 text-red-600 dark:text-red-400"
+                          className="px-2 py-1 text-risk"
                           disabled={actionId === r.id}
                           onClick={() => handleCancelar(r)}
                         >

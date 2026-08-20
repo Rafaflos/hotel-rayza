@@ -71,6 +71,9 @@ public class ReservaService {
                 .habitacion(habitacion)
                 .fechaEntrada(request.fechaEntrada())
                 .fechaSalida(request.fechaSalida())
+                .horaLimiteSalida(request.horaLimiteSalida() != null
+                        ? request.horaLimiteSalida()
+                        : java.time.LocalTime.of(13, 0))
                 .cantidadHuespedes(request.cantidadHuespedes())
                 .precioNoche(habitacion.getPrecioNoche())
                 .cantidadNoches((int) noches)

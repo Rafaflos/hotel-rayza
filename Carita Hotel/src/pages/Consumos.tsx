@@ -118,14 +118,14 @@ export function Consumos() {
       {reservaId > 0 && (
         <div className="flex flex-col gap-6 lg:flex-row">
           <div className="flex-1">
-            <div className="mb-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-800">
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">Total de consumos</p>
-              <p className="mt-1 text-lg font-semibold tabular-nums text-neutral-900 dark:text-neutral-100">S/ {total.toFixed(2)}</p>
+            <div className="mb-4 rounded-lg border border-line p-4">
+              <p className="text-xs text-ink-3">Total de consumos</p>
+              <p className="mt-1 text-lg font-semibold tabular-nums text-ink">S/ {total.toFixed(2)}</p>
             </div>
 
-            <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+            <div className="overflow-x-auto rounded-lg border border-line">
               <table className="w-full text-left text-sm">
-                <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
+                <thead className="bg-canvas text-xs uppercase tracking-wide text-ink-3">
                   <tr>
                     <th className="px-4 py-3 font-medium">Fecha</th>
                     <th className="px-4 py-3 font-medium">Descripción</th>
@@ -134,19 +134,19 @@ export function Consumos() {
                     <th className="px-4 py-3 font-medium">Subtotal</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+                <tbody className="divide-y divide-line">
                   {consumos.map((c) => (
                     <tr key={c.id}>
-                      <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{c.fechaHora.slice(0, 16).replace('T', ' ')}</td>
-                      <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{c.descripcion}</td>
-                      <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">{c.cantidad}</td>
-                      <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">S/ {c.precioUnitario.toFixed(2)}</td>
-                      <td className="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400">S/ {c.subtotal.toFixed(2)}</td>
+                      <td className="px-4 py-3 text-ink-2">{c.fechaHora.slice(0, 16).replace('T', ' ')}</td>
+                      <td className="px-4 py-3 text-ink-2">{c.descripcion}</td>
+                      <td className="px-4 py-3 tabular-nums text-ink-2">{c.cantidad}</td>
+                      <td className="px-4 py-3 tabular-nums text-ink-2">S/ {c.precioUnitario.toFixed(2)}</td>
+                      <td className="px-4 py-3 tabular-nums text-ink-2">S/ {c.subtotal.toFixed(2)}</td>
                     </tr>
                   ))}
                   {consumos.length === 0 && (
                     <tr>
-                      <td colSpan={5} className="px-4 py-6 text-center text-neutral-500 dark:text-neutral-400">
+                      <td colSpan={5} className="px-4 py-6 text-center text-ink-3">
                         Todavía no hay consumos registrados para esta reserva.
                       </td>
                     </tr>
@@ -157,7 +157,7 @@ export function Consumos() {
           </div>
 
           <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4 lg:w-72">
-            <h3 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">Registrar consumo</h3>
+            <h3 className="text-sm font-medium text-ink">Registrar consumo</h3>
             {formError && <ErrorBanner message={formError} />}
 
             <Field label="Servicio (opcional)" htmlFor="servicioId">

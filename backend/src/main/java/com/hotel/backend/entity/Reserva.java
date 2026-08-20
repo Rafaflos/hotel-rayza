@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "reservas")
@@ -41,6 +42,11 @@ public class Reserva {
     @Column(name = "fecha_salida", nullable = false)
     private LocalDate fechaSalida;
 
+    /** Hora tope para desocupar la habitación el día de salida (por defecto 1:00 p.m.). */
+    @Column(name = "hora_limite_salida", nullable = false)
+    @Builder.Default
+    private LocalTime horaLimiteSalida = LocalTime.of(13, 0);
+
     @Column(name = "cantidad_huespedes", nullable = false)
     @Builder.Default
     private Integer cantidadHuespedes = 1;
@@ -50,6 +56,16 @@ public class Reserva {
 
     @Column(name = "cantidad_noches", nullable = false)
     private Integer cantidadNoches;
+
+    /** Días completos cobrados por pasarse de la hora límite de salida. */
+    @Column(name = "dias_extra", nullable = false)
+    @Builder.Default
+    private Integer diasExtra = 0;
+
+    /** Monto acumulado por esos días extra. */
+    @Column(name = "cargo_extra", nullable = false, precision = 10, scale = 2)
+    @Builder.Default
+    private BigDecimal cargoExtra = BigDecimal.ZERO;
 
     @Column(nullable = false, precision = 10, scale = 2)
     @Builder.Default

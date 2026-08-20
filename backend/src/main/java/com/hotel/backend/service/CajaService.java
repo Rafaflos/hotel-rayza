@@ -112,8 +112,18 @@ public class CajaService {
                 caja.getEstado(),
                 caja.getFechaApertura(),
                 caja.getFechaCierre(),
-                caja.getObservaciones()
+                caja.getObservaciones(),
+                caja.getMontoInicial().add(caja.getTotalIngresos()).subtract(caja.getTotalEgresos()),
+                esMiTurno(caja)
         );
+    }
+
+    /** true si el turno lo abrió el usuario que está consultando ahora mismo. */
+    private boolean esMiTurno(Caja caja) {
+        Usuario actual = currentUserService.getUsuario();
+        return actual != null
+                && caja.getUsuarioApertura() != null
+                && actual.getId().equals(caja.getUsuarioApertura().getId());
     }
 
     private MovimientoCajaResponse toResponse(MovimientoCaja movimiento) {

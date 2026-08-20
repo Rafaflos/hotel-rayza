@@ -73,9 +73,12 @@ export interface Reserva {
   habitacion: Habitacion
   fechaEntrada: string
   fechaSalida: string
+  horaLimiteSalida: string
   cantidadHuespedes: number
   precioNoche: number
   cantidadNoches: number
+  diasExtra: number
+  cargoExtra: number
   descuento: number
   subtotal: number
   total: number
@@ -88,6 +91,7 @@ export interface ReservaInput {
   habitacionId: number
   fechaEntrada: string
   fechaSalida: string
+  horaLimiteSalida?: string
   cantidadHuespedes: number
   descuento?: number
   observaciones?: string
@@ -177,6 +181,8 @@ export interface Caja {
   fechaApertura: string
   fechaCierre?: string
   observaciones?: string
+  efectivoEsperado: number
+  miTurno: boolean
 }
 
 export type TipoMovimiento = 'INGRESO' | 'EGRESO'
@@ -201,6 +207,11 @@ export interface DashboardResumen {
   checkinsHoy: number
   checkoutsHoy: number
   ingresosHoy: number
+  tasaOcupacion: number
+  estanciasVencidas: number
+  porCobrarVencidas: number
+  egresosPendientes: number
+  avisosNoLeidos: number
 }
 
 export interface Servicio {

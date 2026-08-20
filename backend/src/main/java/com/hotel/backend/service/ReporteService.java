@@ -109,7 +109,9 @@ public class ReporteService {
                 caja.getEstado(),
                 caja.getFechaApertura(),
                 caja.getFechaCierre(),
-                caja.getObservaciones()
+                caja.getObservaciones(),
+                caja.getMontoInicial().add(caja.getTotalIngresos()).subtract(caja.getTotalEgresos()),
+                false // en el reporte histórico no aplica la marca de "mi turno"
         );
     }
 }

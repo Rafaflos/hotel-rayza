@@ -19,6 +19,9 @@ import { Reportes } from './pages/Reportes'
 import { Comprobantes } from './pages/Comprobantes'
 import { Usuarios } from './pages/Usuarios'
 import { Empleados } from './pages/Empleados'
+import { Estancias } from './pages/Estancias'
+import { Egresos } from './pages/Egresos'
+import { Avisos } from './pages/Avisos'
 import type { JSX } from 'react'
 
 const TODOS_OPERATIVOS = ['ADMIN', 'GERENTE', 'RECEPCIONISTA']
@@ -26,6 +29,9 @@ const TODOS_OPERATIVOS = ['ADMIN', 'GERENTE', 'RECEPCIONISTA']
 // Cada ruta protegida con los roles que la pueden ver (coincide con utils/modulos.ts).
 const rutas: { path: string; element: JSX.Element; roles?: string[] }[] = [
   { path: '/', element: <Dashboard /> },
+  { path: '/estancias', element: <Estancias />, roles: TODOS_OPERATIVOS },
+  { path: '/avisos', element: <Avisos /> },
+  { path: '/egresos', element: <Egresos />, roles: ['ADMIN', 'GERENTE', 'CAJERO'] },
   { path: '/habitaciones', element: <Habitaciones />, roles: TODOS_OPERATIVOS },
   { path: '/huespedes', element: <Huespedes />, roles: TODOS_OPERATIVOS },
   { path: '/reservas', element: <Reservas />, roles: TODOS_OPERATIVOS },

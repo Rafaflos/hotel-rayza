@@ -114,9 +114,9 @@ export function Empleados() {
 
       {error && <ErrorBanner message={error} />}
 
-      <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+      <div className="overflow-x-auto rounded-lg border border-line">
         <table className="w-full text-left text-sm">
-          <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
+          <thead className="bg-canvas text-xs uppercase tracking-wide text-ink-3">
             <tr>
               <th className="px-4 py-3 font-medium">Documento</th>
               <th className="px-4 py-3 font-medium">Nombre</th>
@@ -126,20 +126,20 @@ export function Empleados() {
               <th className="px-4 py-3 font-medium text-right">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <tbody className="divide-y divide-line">
             {loading ? (
               <TableSkeleton columns={6} />
             ) : (
               empleados.map((e) => (
-                <tr key={e.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-900/60">
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
+                <tr key={e.id} className="hover:bg-canvas/60">
+                  <td className="px-4 py-3 text-ink-2">
                     {e.tipoDocumento} {e.numeroDocumento}
                   </td>
-                  <td className="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">
+                  <td className="px-4 py-3 font-medium text-ink">
                     {e.nombres} {e.apellidos}
                   </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{e.cargo || '—'}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{e.telefono || '—'}</td>
+                  <td className="px-4 py-3 text-ink-2">{e.cargo || '—'}</td>
+                  <td className="px-4 py-3 text-ink-2">{e.telefono || '—'}</td>
                   <td className="px-4 py-3">
                     <Badge tone={e.activo ? 'success' : 'neutral'}>{e.activo ? 'Activo' : 'Inactivo'}</Badge>
                   </td>
@@ -151,7 +151,7 @@ export function Empleados() {
                       {e.activo && (
                         <Button
                           variant="ghost"
-                          className="px-2 py-1 text-red-600 dark:text-red-400"
+                          className="px-2 py-1 text-risk"
                           onClick={() => handleDesactivar(e)}
                         >
                           Desactivar

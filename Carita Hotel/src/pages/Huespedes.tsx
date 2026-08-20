@@ -122,9 +122,9 @@ export function Huespedes() {
         />
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+      <div className="overflow-x-auto rounded-lg border border-line">
         <table className="w-full text-left text-sm">
-          <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
+          <thead className="bg-canvas text-xs uppercase tracking-wide text-ink-3">
             <tr>
               <th className="px-4 py-3 font-medium">Documento</th>
               <th className="px-4 py-3 font-medium">Nombres</th>
@@ -134,19 +134,19 @@ export function Huespedes() {
               <th className="px-4 py-3 font-medium text-right">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <tbody className="divide-y divide-line">
             {loading ? (
               <TableSkeleton columns={6} />
             ) : (
               huespedes.map((h) => (
-                <tr key={h.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-900/60">
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
+                <tr key={h.id} className="hover:bg-canvas/60">
+                  <td className="px-4 py-3 text-ink-2">
                     {h.tipoDocumento} {h.numeroDocumento}
                   </td>
-                  <td className="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">{h.nombres}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{h.apellidos}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{h.telefono || '—'}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{h.correo || '—'}</td>
+                  <td className="px-4 py-3 font-medium text-ink">{h.nombres}</td>
+                  <td className="px-4 py-3 text-ink-2">{h.apellidos}</td>
+                  <td className="px-4 py-3 text-ink-2">{h.telefono || '—'}</td>
+                  <td className="px-4 py-3 text-ink-2">{h.correo || '—'}</td>
                   <td className="px-4 py-3 text-right">
                     <Button variant="ghost" className="px-2 py-1" onClick={() => openEdit(h)}>
                       Editar

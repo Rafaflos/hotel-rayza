@@ -3,10 +3,12 @@ import { Sidebar } from './Sidebar'
 
 export function Layout() {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex h-screen overflow-hidden bg-canvas">
       <Sidebar />
-      <main className="flex-1 p-6">
-        <Outlet />
+      <main className="flex-1 overflow-y-auto">
+        <div className="mx-auto max-w-[1400px] px-7 py-7">
+          <Outlet />
+        </div>
       </main>
     </div>
   )
